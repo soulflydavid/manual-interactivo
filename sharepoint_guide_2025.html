@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de SharePoint 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0078d4 0%, #00bcf2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-title {
+            color: #0078d4;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 10px;
+        }
+
+        .visual-box {
+            background: #f5f5f5;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+        }
+
+        .icon-large {
+            font-size: 4em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .step-box {
+            background: white;
+            border-left: 4px solid #0078d4;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #0078d4;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-box::before {
+            content: "💡 TIP: ";
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .warning-box {
+            background: #cfe2ff;
+            border-left: 4px solid #0d6efd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box::before {
+            content: "ℹ️ IMPORTANTE: ";
+            font-weight: bold;
+            color: #084298;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #0078d4 0%, #00bcf2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3em;
+            margin: 15px 0 10px 0;
+        }
+
+        .mockup {
+            background: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .mockup-header {
+            background: #0078d4;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+            margin: -20px -20px 15px -20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .folder-item {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .folder-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-color: #0078d4;
+        }
+
+        .folder-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .btn {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #106ebe;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,120,212,0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #0078d4, #00bcf2);
+            height: 100%;
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+
+        .slide-counter {
+            text-align: center;
+            color: #666;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .comparison-before {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+
+        .comparison-after {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+
+        .doc-icon {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+
+        .doc-word {
+            background: #2b579a;
+            color: white;
+        }
+
+        .doc-excel {
+            background: #217346;
+            color: white;
+        }
+
+        .doc-pdf {
+            background: #dc3545;
+            color: white;
+        }
+
+        .doc-image {
+            background: #6c757d;
+            color: white;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .slide-title {
+                font-size: 1.5em;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗂️ SharePoint</h1>
+            <p>Tu Biblioteca Digital de Documentos</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Guía simplificada para todos</p>
+        </div>
+
+        <div class="content">
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Slide 1: ¿Qué es SharePoint? -->
+            <div class="slide active" data-slide="1">
+                <h2 class="slide-title">¿Qué es SharePoint?</h2>
+                
+                <div class="visual-box">
+                    <div class="icon-large">📚</div>
+                    <h3 style="text-align: center; color: #333; margin-bottom: 15px;">Tu Archivo Digital en la Nube</h3>
+                    <p style="text-align: center; font-size: 1.1em; line-height: 1.8;">
+                        SharePoint es como un <strong>archivero digital gigante</strong> donde toda la empresa 
+                        guarda, comparte y colabora en documentos.
+                    </p>
+                </div>
+
+                <div class="comparison">
+                    <div class="comparison-item comparison-before">
+                        <h3 style="color: #dc3545; margin-bottom: 10px;">❌ Antes (Sin SharePoint)</h3>
+                        <ul style="padding-left: 20px;">
+                            <li>Documentos en tu computadora</li>
+                            <li>Enviar archivos por correo</li>
+                            <li>Versiones duplicadas</li>
+                            <li>Difícil encontrar archivos</li>
+                            <li>Si tu PC falla, pierdes todo</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item comparison-after">
+                        <h3 style="color: #28a745; margin-bottom: 10px;">✅ Ahora (Con SharePoint)</h3>
+                        <ul style="padding-left: 20px;">
+                            <li>Todo en un solo lugar</li>
+                            <li>Acceso desde cualquier lugar</li>
+                            <li>Una sola versión actualizada</li>
+                            <li>Búsqueda rápida</li>
+                            <li>Todo respaldado y seguro</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    Piensa en SharePoint como Google Drive o Dropbox, pero diseñado específicamente para empresas.
+                </div>
+            </div>
+
+            <!-- Slide 2: ¿Cómo entrar? -->
+            <div class="slide" data-slide="2">
+                <h2 class="slide-title">¿Cómo Accedo a SharePoint?</h2>
+
+                <div class="step-box">
+                    <span class="step-number">1</span>
+                    <strong>Desde tu navegador web</strong>
+                    <p style="margin-top: 10px;">Ve a: <span style="background: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: monospace;">tuempresa.sharepoint.com</span></p>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">2</span>
+                    <strong>O desde Microsoft 365</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Entra a <span style="background: #f0f0f0; padding: 2px 8px; border-radius: 3px;">office.com</span></li>
+                        <li>Haz clic en el ícono de SharePoint 🗂️</li>
+                    </ul>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">3</span>
+                    <strong>Inicia sesión</strong>
+                    <p style="margin-top: 10px;">Con tu usuario y contraseña de Microsoft 365 (la misma de Outlook)</p>
+                </div>
+
+                <div class="visual-box" style="background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);">
+                    <h3 style="color: #00695c; margin-bottom: 15px;">🌟 Ventaja principal:</h3>
+                    <p style="font-size: 1.1em; text-align: center;">
+                        Puedes acceder desde <strong>cualquier dispositivo</strong>:<br>
+                        Tu computadora, tu celular, una tablet o incluso desde casa
+                    </p>
+                </div>
+
+                <div class="tip-box">
+                    Guarda la página de SharePoint en tus favoritos para acceder rápidamente.
+                </div>
+            </div>
+
+            <!-- Slide 3: Pantalla principal -->
+            <div class="slide" data-slide="3">
+                <h2 class="slide-title">Conociendo la Pantalla Principal</h2>
+
+                <div class="mockup">
+                    <div class="mockup-header">
+                        <span>🏠 SharePoint - Inicio</span>
+                        <span style="font-size: 0.9em;">🔍 Buscar</span>
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <h4 style="color: #0078d4; margin-bottom: 10px;">📌 Sitios Frecuentes:</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                            <div style="background: #0078d4; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 2em;">🏢</div>
+                                <div style="margin-top: 5px; font-weight: bold;">Departamento</div>
+                            </div>
+                            <div style="background: #00bcf2; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 2em;">📁</div>
+                                <div style="margin-top: 5px; font-weight: bold;">Proyectos</div>
+                            </div>
+                            <div style="background: #7fba00; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 2em;">📋</div>
+                                <div style="margin-top: 5px; font-weight: bold;">Recursos</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <h4 style="color: #0078d4; margin-bottom: 10px;">📄 Documentos Recientes:</h4>
+                        <div class="folder-item">
+                            <span class="folder-icon">📘</span>
+                            <div>
+                                <strong>Contrato_Cliente_Lopez.docx</strong>
+                                <div style="font-size: 0.85em; color: #666;">Modificado hace 2 horas</div>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <span class="folder-icon">📊</span>
+                            <div>
+                                <strong>Reporte_Ventas_Oct.xlsx</strong>
+                                <div style="font-size: 0.85em; color: #666;">Modificado ayer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    La página de inicio te muestra lo que usas más frecuentemente, facilitando el acceso rápido.
+                </div>
+            </div>
+
+            <!-- Slide 4: Sitios y bibliotecas -->
+            <div class="slide" data-slide="4">
+                <h2 class="slide-title">Sitios y Bibliotecas</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">¿Qué es un Sitio?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Un <strong>sitio</strong> es como un "departamento virtual". Por ejemplo:
+                    </p>
+                    <ul style="margin-top: 15px;">
+                        <li>🏢 <strong>Sitio de Ventas:</strong> Todo lo relacionado con ventas</li>
+                        <li>💼 <strong>Sitio de Recursos Humanos:</strong> Documentos de RRHH</li>
+                        <li>🏗️ <strong>Sitio de Proyectos:</strong> Documentos de cada proyecto</li>
+                    </ul>
+                </div>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">¿Qué es una Biblioteca?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Una <strong>biblioteca</strong> es como un "archivero dentro del sitio". Por ejemplo, el Sitio de Ventas puede tener:
+                    </p>
+                    <div style="margin-top: 15px; background: white; padding: 15px; border-radius: 8px;">
+                        <div style="margin: 10px 0;">📁 <strong>Biblioteca "Contratos"</strong> → Todos los contratos</div>
+                        <div style="margin: 10px 0;">📁 <strong>Biblioteca "Cotizaciones"</strong> → Todas las cotizaciones</div>
+                        <div style="margin: 10px 0;">📁 <strong>Biblioteca "Reportes"</strong> → Todos los reportes</div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    Piensa en: Sitio = Oficina física | Biblioteca = Archivero dentro de esa oficina
+                </div>
+            </div>
+
+            <!-- Slide 5: Subir archivos -->
+            <div class="slide" data-slide="5">
+                <h2 class="slide-title">📤 Subiendo Archivos</h2>
+
+                <div class="visual-box">
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">Es muy sencillo guardar documentos en SharePoint:</p>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Entra al sitio donde quieres guardar el archivo</strong>
+                        <p style="margin-top: 10px;">Ejemplo: "Sitio de Ventas"</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Ve a la biblioteca correcta</strong>
+                        <p style="margin-top: 10px;">Ejemplo: Biblioteca "Contratos"</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Haz clic en "Cargar" o "Nuevo"</strong>
+                        <div style="background: white; padding: 15px; margin-top: 10px; border-radius: 5px; text-align: center;">
+                            <button style="background: #0078d4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                                ⬆️ Cargar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Selecciona tu archivo</strong>
+                        <p style="margin-top: 10px;">Busca el archivo en tu computadora y ábrelo</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>¡Listo!</strong>
+                        <p style="margin-top: 10px;">El archivo ya está guardado en SharePoint y todos pueden verlo</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    También puedes arrastrar archivos directamente desde tu computadora a la biblioteca de SharePoint.
+                </div>
+            </div>
+
+            <!-- Slide 6: Buscar y descargar -->
+            <div class="slide" data-slide="6">
+                <h2 class="slide-title">🔍 Buscando y Descargando Archivos</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">Buscar un archivo:</h3>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Usa la barra de búsqueda</strong>
+                        <div style="background: white; padding: 15px; margin-top: 10px; border: 2px solid #0078d4; border-radius: 25px; text-align: center;">
+                            🔍 Buscar en SharePoint...
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Escribe lo que buscas:</strong>
+                        <ul style="margin-top: 10px;">
+                            <li>Nombre del archivo: "contrato lopez"</li>
+                            <li>Tipo de documento: "cotización"</li>
+                            <li>Contenido dentro del documento</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>SharePoint te muestra los resultados</strong>
+                        <p style="margin-top: 10px;">Incluso busca dentro del contenido de los documentos</p>
+                    </div>
+                </div>
+
+                <div class="visual-box" style="background: #e8f5e9;">
+                    <h3 style="color: #2e7d32; margin-bottom: 15px;">📥 Descargar un archivo:</h3>
+
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <p><strong>Método 1:</strong> Haz clic derecho en el archivo → "Descargar"</p>
+                    </div>
+
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <p><strong>Método 2:</strong> Haz clic en los tres puntos (...) → "Descargar"</p>
+                    </div>
+
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <p><strong>Método 3:</strong> Selecciona varios archivos → "Descargar" (se descargan todos en un ZIP)</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    No necesitas descargar los archivos para verlos o editarlos. Puedes abrirlos directamente en SharePoint.
+                </div>
+            </div>
+
+            <!-- Slide 7: Compartir y colaborar -->
+            <div class="slide" data-slide="7">
+                <h2 class="slide-title">🤝 Compartiendo y Colaborando</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">Compartir un archivo con alguien:</h3>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Selecciona el archivo</strong>
+                        <p style="margin-top: 10px;">Haz clic en el archivo que quieres compartir</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Haz clic en "Compartir"</strong>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <button style="background: #0078d4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                                🔗 Compartir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Elige con quién compartir:</strong>
+                        <ul style="margin-top: 10px;">
+                            <li>Escribe el correo de la persona</li>
+                            <li>Define permisos: ¿Puede solo ver o también editar?</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Enviar</strong>
+                        <p style="margin-top: 10px;">La persona recibirá un correo con el enlace al archivo</p>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div style="font-size: 2.5em;">👁️</div>
+                        <h3>Solo Ver</h3>
+                        <p>La persona puede ver pero no modificar</p>
+                    </div>
+                    <div class="feature-card">
+                        <div style="font-size: 2.5em;">✏️</div>
+                        <h3>Editar</h3>
+                        <p>Puede ver y modificar el archivo</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    Cuando varias personas editan el mismo archivo, SharePoint muestra quién está trabajando en él y sincroniza los cambios en tiempo real.
+                </div>
+            </div>
+
+            <!-- Slide 8: Versiones -->
+            <div class="slide" data-slide="8">
+                <h2 class="slide-title">🕐 Historial de Versiones</h2>
+
+                <div class="visual-box">
+                    <div class="icon-large">⏮️</div>
+                    <h3 style="text-align: center; color: #333; margin-bottom: 15px;">¿Cometiste un error?</h3>
+                    <p style="text-align: center; font-size: 1.1em; line-height: 1.8;">
+                        SharePoint guarda <strong>todas las versiones anteriores</strong> de tus archivos.<br>
+                        Puedes volver a una versión anterior en cualquier momento.
+                    </p>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">1</span>
+                    <strong>Selecciona el archivo</strong>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">2</span>
+                    <strong>Haz clic en los tres puntos (...) → "Historial de versiones"</strong>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">3</span>
+                    <strong>Verás todas las versiones guardadas:</strong>
+                    <div class="mockup" style="margin-top: 10px;">
+                        <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 5px; margin: 5px 0;">
+                            <strong>Versión 3.0</strong> - Hoy 2:30 PM - por María González
+                        </div>
+                        <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 5px; margin: 5px 0;">
+                            <strong>Versión 2.0</strong> - Ayer 5:15 PM - por Juan Pérez
+                        </div>
+                        <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 5px; margin: 5px 0;">
+                            <strong>Versión 1.0</strong> - 20/10/2025 - por Pedro Ramírez
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">4</span>
+                    <strong>Restaura la versión que necesites</strong>
+                </div>
+
+                <div class="tip-box">
+                    Esto es perfecto si alguien borró algo importante o si necesitas ver cómo era el documento antes.
+                </div>
+            </div>
+
+            <!-- Slide 9: Sincronización -->
+            <div class="slide" data-slide="9">
+                <h2 class="slide-title">🔄 Sincronizar con tu Computadora</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">¿Qué es sincronizar?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Puedes tener una <strong>copia automática</strong> de los archivos de SharePoint 
+                        en tu computadora. Los cambios se sincronizan en ambos lados.
+                    </p>
+                </div>
+
+                <div class="comparison">
+                    <div class="comparison-item" style="background: #f0f0f0; border: 2px solid #666;">
+                        <h3 style="color: #333; margin-bottom: 10px;">☁️ En SharePoint</h3>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <div style="font-size: 3em;">📄</div>
+                            <p style="margin-top: 10px;">Contrato.docx</p>
+                        </div>
+                    </div>
+                    <div class="comparison-item" style="background: #f0f0f0; border: 2px solid #666;">
+                        <h3 style="color: #333; margin-bottom: 10px;">💻 En tu PC</h3>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <div style="font-size: 3em;">📄</div>
+                            <p style="margin-top: 10px;">Contrato.docx</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 20px 0; font-size: 2em; color: #0078d4;">
+                    ⬆️⬇️ Se actualizan automáticamente
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">1</span>
+                    <strong>En SharePoint, haz clic en "Sincronizar"</strong>
+                    <p style="margin-top: 10px;">Está en la parte superior de la biblioteca</p>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">2</span>
+                    <strong>OneDrive se abrirá automáticamente</strong>
+                    <p style="margin-top: 10px;">OneDrive es la herramienta que hace la sincronización</p>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-number">3</span>
+                    <strong>Los archivos aparecen en tu "Explorador de archivos"</strong>
+                    <p style="margin-top: 10px;">Busca la carpeta con el nombre de tu empresa</p>
+                </div>
+
+                <div class="warning-box">
+                    Ventaja: Puedes trabajar sin internet y los cambios se sincronizan cuando vuelvas a conectarte.
+                </div>
+            </div>
+
+            <!-- Slide 10: Organización -->
+            <div class="slide" data-slide="10">
+                <h2 class="slide-title">🗂️ Organizando Documentos</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">Crear carpetas dentro de bibliotecas:</h3>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Dentro de una biblioteca, haz clic en "Nuevo" → "Carpeta"</strong>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Dale un nombre descriptivo</strong>
+                        <p style="margin-top: 10px;">Ejemplo: "Contratos 2025", "Cliente López", "Facturas Octubre"</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Mueve archivos a las carpetas</strong>
+                        <p style="margin-top: 10px;">Arrastra y suelta, o usa "Mover a"</p>
+                    </div>
+                </div>
+
+                <div class="mockup">
+                    <div class="mockup-header">📁 Biblioteca: Documentos Ventas</div>
+                    
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <div><strong>2025</strong></div>
+                    </div>
+                    <div style="margin-left: 40px;">
+                        <div class="folder-item">
+                            <span class="folder-icon">📁</span>
+                            <div><strong>Enero</strong></div>
+                        </div>
+                        <div class="folder-item">
+                            <span class="folder-icon">📁</span>
+                            <div><strong>Febrero</strong></div>
+                        </div>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <div><strong>Clientes</strong></div>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <div><strong>Plantillas</strong></div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    Mantén una estructura simple y lógica. No crees demasiadas carpetas anidadas o será difícil encontrar archivos.
+                </div>
+            </div>
+
+            <!-- Slide 11: Metadatos -->
+            <div class="slide" data-slide="11">
+                <h2 class="slide-title">🏷️ Etiquetas y Propiedades</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">¿Qué son los metadatos?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Son <strong>etiquetas o información extra</strong> que le agregas a los documentos 
+                        para organizarlos mejor.
+                    </p>
+                </div>
+
+                <div class="step-box">
+                    <strong>Ejemplos de metadatos:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>📅 <strong>Fecha:</strong> ¿Cuándo se creó?</li>
+                        <li>👤 <strong>Cliente:</strong> ¿De qué cliente es?</li>
+                        <li>📋 <strong>Tipo:</strong> ¿Es contrato, factura o cotización?</li>
+                        <li>✅ <strong>Estado:</strong> ¿Está aprobado, pendiente o revisión?</li>
+                        <li>🏢 <strong>Proyecto:</strong> ¿A qué proyecto pertenece?</li>
+                    </ul>
+                </div>
+
+                <div class="visual-box" style="background: #fff8e1;">
+                    <h3 style="color: #f57c00; margin-bottom: 15px;">💡 ¿Por qué usar metadatos?</h3>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>Búsqueda más fácil:</strong> Encuentra todos los contratos de "Cliente López"
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>Filtros rápidos:</strong> Muestra solo facturas de Octubre
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>Orden automático:</strong> Organiza por estado, fecha o cliente
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    Tu administrador puede configurar qué metadatos usar. Pregunta al área de TI cuáles están disponibles.
+                </div>
+            </div>
+
+            <!-- Slide 12: Seguridad y permisos -->
+            <div class="slide" data-slide="12">
+                <h2 class="slide-title">🔒 Seguridad y Permisos</h2>
+
+                <div class="visual-box">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">No todos ven todo</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        SharePoint controla <strong>quién puede ver qué</strong>. Solo verás los documentos 
+                        a los que tienes acceso.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div style="font-size: 2.5em;">👁️</div>
+                        <h3>Lectura</h3>
+                        <p>Solo puedes ver, no modificar</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div style="font-size: 2.5em;">✏️</div>
+                        <h3>Edición</h3>
+                        <p>Puedes ver y modificar</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div style="font-size: 2.5em;">➕</div>
+                        <h3>Colaboración</h3>
+                        <p>Puedes agregar archivos nuevos</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        <div style="font-size: 2.5em;">⚙️</div>
+                        <h3>Control Total</h3>
+                        <p>Administras todo el sitio</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    Si necesitas acceso a un sitio o documento, contacta a tu supervisor o al área de TI.
+                </div>
+
+                <div class="visual-box" style="background: #ffebee;">
+                    <h3 style="color: #c62828; margin-bottom: 15px;">⚠️ Recuerda:</h3>
+                    <ul style="padding-left: 20px;">
+                        <li>No compartas tu contraseña con nadie</li>
+                        <li>Cierra sesión en computadoras compartidas</li>
+                        <li>Ten cuidado al compartir documentos confidenciales</li>
+                        <li>Si ves algo sospechoso, reporta a TI inmediatamente</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 13: Consejos prácticos -->
+            <div class="slide" data-slide="13">
+                <h2 class="slide-title">💡 Mejores Prácticas</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div style="font-size: 2.5em;">📝</div>
+                        <h3>Nombres Claros</h3>
+                        <p>Usa nombres descriptivos para tus archivos</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div style="font-size: 2.5em;">🗂️</div>
+                        <h3>Organiza Bien</h3>
+                        <p>Guarda documentos en el lugar correcto</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div style="font-size: 2.5em;">🚫</div>
+                        <h3>No Dupliques</h3>
+                        <p>Evita tener copias del mismo archivo</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div style="font-size: 2.5em;">💾</div>
+                        <h3>Guarda Directo</h3>
+                        <p>Trabaja desde SharePoint, no tu PC</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <div style="font-size: 2.5em;">🏷️</div>
+                        <h3>Usa Etiquetas</h3>
+                        <p>Completa metadatos cuando sea posible</p>
+                    </div>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%);">
+                        <div style="font-size: 2.5em;">🗑️</div>
+                        <h3>Limpia Regular</h3>
+                        <p>Borra archivos obsoletos</p>
+                    </div>
+                </div>
+
+                <div class="visual-box" style="margin-top: 25px;">
+                    <h3 style="color: #0078d4; margin-bottom: 15px;">📋 Convenciones de Nombres</h3>
+                    
+                    <div class="comparison">
+                        <div class="comparison-item comparison-before">
+                            <h3 style="color: #dc3545; margin-bottom: 10px;">❌ Mal</h3>
+                            <ul style="padding-left: 20px; font-size: 0.9em;">
+                                <li>doc1.docx</li>
+                                <li>nuevo.xlsx</li>
+                                <li>final final2.pdf</li>
+                                <li>sin título.docx</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item comparison-after">
+                            <h3 style="color: #28a745; margin-bottom: 10px;">✅ Bien</h3>
+                            <ul style="padding-left: 20px; font-size: 0.9em;">
+                                <li>Contrato_Lopez_2025.docx</li>
+                                <li>Reporte_Ventas_Oct.xlsx</li>
+                                <li>Cotizacion_ProyectoX.pdf</li>
+                                <li>Factura_001234.pdf</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    Usa guiones bajos _ en lugar de espacios, y agrega fechas en formato AAAA-MM-DD para mejor orden.
+                </div>
+            </div>
+
+            <!-- Slide 14: Resolución de problemas -->
+            <div class="slide" data-slide="14">
+                <h2 class="slide-title">🔧 Problemas Comunes</h2>
+
+                <div class="step-box" style="border-left-color: #ffc107;">
+                    <span class="step-number" style="background: #ffc107; color: #333;">❓</span>
+                    <strong>No puedo abrir un archivo</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Verifica que tengas la aplicación instalada (Word, Excel, etc.)</li>
+                        <li>Intenta abrirlo en el navegador en lugar de descargar</li>
+                        <li>Verifica que tengas permisos para ver el archivo</li>
+                    </ul>
+                </div>
+
+                <div class="step-box" style="border-left-color: #ffc107;">
+                    <span class="step-number" style="background: #ffc107; color: #333;">❓</span>
+                    <strong>No encuentro un documento</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Usa la búsqueda en lugar de navegar manualmente</li>
+                        <li>Verifica que estés en el sitio correcto</li>
+                        <li>Pregunta a tu compañero si lo movió</li>
+                    </ul>
+                </div>
+
+                <div class="step-box" style="border-left-color: #ffc107;">
+                    <span class="step-number" style="background: #ffc107; color: #333;">❓</span>
+                    <strong>El archivo no se sincroniza</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Verifica tu conexión a internet</li>
+                        <li>Revisa que OneDrive esté funcionando (ícono en la bandeja del sistema)</li>
+                        <li>Cierra y abre OneDrive</li>
+                    </ul>
+                </div>
+
+                <div class="step-box" style="border-left-color: #ffc107;">
+                    <span class="step-number" style="background: #ffc107; color: #333;">❓</span>
+                    <strong>Borré un archivo por error</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Ve a la "Papelera de reciclaje" del sitio</li>
+                        <li>Busca el archivo y haz clic en "Restaurar"</li>
+                        <li>Si no lo encuentras, contacta a TI (pueden recuperarlo)</li>
+                    </ul>
+                </div>
+
+                <div class="step-box" style="border-left-color: #ffc107;">
+                    <span class="step-number" style="background: #ffc107; color: #333;">❓</span>
+                    <strong>Alguien editó mi documento</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Revisa el historial de versiones</li>
+                        <li>Puedes ver quién hizo cada cambio</li>
+                        <li>Restaura una versión anterior si es necesario</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    Para cualquier problema que no puedas resolver, contacta al área de TI. Estamos para ayudarte.
+                </div>
+            </div>
+
+            <!-- Slide 15: Resumen final -->
+            <div class="slide" data-slide="15">
+                <h2 class="slide-title">🎯 Resumen: Lo Esencial</h2>
+
+                <div class="visual-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h3 style="text-align: center; margin-bottom: 20px;">¿Qué aprendiste?</h3>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>📚 SharePoint es:</strong> Tu biblioteca digital donde guardas y compartes documentos
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>📤 Puedes:</strong> Subir, descargar, compartir y editar archivos
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>🔍 Búsqueda:</strong> Encuentra cualquier documento rápidamente
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>🤝 Colaboración:</strong> Trabaja con otros en tiempo real
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>🕐 Versiones:</strong> Siempre puedes recuperar versiones anteriores
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>🔒 Seguro:</strong> Tus documentos están protegidos y respaldados
+                    </div>
+                </div>
+
+                <div class="visual-box" style="margin-top: 25px; background: #e8f5e9;">
+                    <h3 style="color: #2e7d32; text-align: center; margin-bottom: 15px;">📋 Checklist Diario</h3>
+                    <div style="background: white; padding: 20px; border-radius: 10px;">
+                        <div style="margin: 10px 0;">☐ Guarda documentos en SharePoint, no en tu PC</div>
+                        <div style="margin: 10px 0;">☐ Usa nombres descriptivos para tus archivos</div>
+                        <div style="margin: 10px 0;">☐ Organiza en las carpetas correctas</div>
+                        <div style="margin: 10px 0;">☐ Comparte en lugar de enviar por correo</div>
+                        <div style="margin: 10px 0;">☐ Revisa que tus archivos estén sincronizados</div>
+                    </div>
+                </div>
+
+                <div class="visual-box" style="margin-top: 25px; background: linear-gradient(135deg, #0078d4 0%, #00bcf2 100%); color: white; text-align: center; padding: 40px;">
+                    <div style="font-size: 4em; margin-bottom: 20px;">🎉</div>
+                    <h2 style="margin-bottom: 15px;">¡Felicitaciones!</h2>
+                    <p style="font-size: 1.2em;">Ahora conoces SharePoint</p>
+                    <p style="font-size: 1.1em; margin-top: 15px; opacity: 0.9;">Empieza a usarlo y verás lo útil que es</p>
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                        <p style="font-size: 1em;">¿Tienes dudas? Contacta al área de TI</p>
+                        <p style="font-size: 1em; margin-top: 5px;">Estamos aquí para ayudarte 🤝</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="navigation">
+                <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+                <button class="btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+            </div>
+
+            <div class="slide-counter" id="slideCounter"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            const slideCounter = document.getElementById('slideCounter');
+
+            if (n > totalSlides) { currentSlide = totalSlides; }
+            if (n < 1) { currentSlide = 1; }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+
+            prevBtn.disabled = currentSlide === 1;
+            
+            if (currentSlide === totalSlides) {
+                nextBtn.textContent = '🎯 Finalizar';
+            } else {
+                nextBtn.textContent = 'Siguiente →';
+            }
+
+            const progress = (currentSlide / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+
+            slideCounter.textContent = `Página ${currentSlide} de ${totalSlides}`;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            if (currentSlide > totalSlides) {
+                alert('¡Completaste la guía de SharePoint! 🎉\n\nAhora estás listo para usar la biblioteca digital de documentos.\n\nRecuerda:\n- Guarda todo en SharePoint\n- Comparte en lugar de enviar por correo\n- El área de TI está disponible para cualquier duda');
+                currentSlide = totalSlides;
+                return;
+            }
+            showSlide(currentSlide);
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Inicializar
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
